@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Classifier</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            width: 500px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            outline: none;
+            resize: none;
+            transition: border 0.3s;
+        }
+        textarea:focus {
+            border: 1px solid #4facfe;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            transform: scale(1.05);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #fff;
+            background: linear-gradient(45deg, #43e97b, #38f9d7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Resume Text</h2>
+        <form method="POST" action="/predict/">
+            {% csrf_token %}
+            <textarea name="resume_text" placeholder="Paste resume text here..."></textarea><br>
+            <button type="submit">Classify Resume</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result">
+                Prediction: {{ prediction }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
